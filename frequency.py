@@ -5,10 +5,10 @@ from collections import Counter
 import string
 from sys import stdout
 
-stopwords_file = open("stopwords.txt", "r")
+stopwords_file = open("lib/stopwords.txt", "r")
 stopwords = stopwords_file.read().splitlines()
 
-stopphrases_file = open("stopphrases.txt", "r")
+stopphrases_file = open("lib/stopphrases.txt", "r")
 stopphrases = stopphrases_file.read().splitlines()
 
 translator = string.maketrans(string.punctuation+"\n", ' '*(len(string.punctuation)+1))
