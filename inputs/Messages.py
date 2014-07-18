@@ -7,8 +7,12 @@ class Messages(CTLInput):
     def __init__(self):
         super(Messages, self).__init__()
         print "Retrieving rows..."
-        self.cursor.execute("SELECT COUNT(*) FROM message")
-        rows = self.cursor.fetchone()[0]
+
+        cursor = self.db.cursor()
+        cursor.execute("SELECT COUNT(*) FROM message")
+        rows = cursor.fetchone()[0]
+        cursor.close()
+
         for i in range(0, self.subsets):
             self.getSubgroup(i, rows)
         stdout.write("\n")
@@ -27,7 +31,8 @@ class Messages(CTLInput):
 
         # Use a deferred join.
         # See #2: http://www.iheavy.com/2013/06/19/3-ways-to-optimize-for-paging-in-mysql/
-        self.cursor.execute("""
+        cursor = self.db.cursor()
+        cursor.execute("""
             SELECT m.*, a.address
             FROM message m
             INNER JOIN (SELECT id
@@ -36,5 +41,6 @@ class Messages(CTLInput):
             AS message_join USING (id)
             JOIN actor a on m.actor_id=a.id;
         """ % (perpage, start))
-        columns = self.cursor.description
-        self.result = self.result + [{columns[index][0]:column for index, column in enumerate(value)} for value in self.cursor.fetchall()]
+        columns = cursor.description
+        self.result = self.result + [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor]
+        cursor.close()
