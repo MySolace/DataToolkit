@@ -1,0 +1,15 @@
+language: python
+python:
+  - "3.6"
+  - "3.6-dev"
+  - "3.7-dev"
+    # CPython
+  - "nightly"
+    # PyPy versions
+  - "pypy"  # PyPy2 2.5.0
+  - "pypy3" # Pypy3 2.4.0
+  - "pypy-5.3.1"
+# install:
+#  - pip install -r requirements.txt
+script:
+  - pytest
