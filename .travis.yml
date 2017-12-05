@@ -9,7 +9,25 @@ python:
   - "pypy"  # PyPy2 2.5.0
   - "pypy3" # Pypy3 2.4.0
   - "pypy-5.3.1"
-# install:
-#  - pip install -r requirements.txt
+branches:
+  only:
+    - feat-travis-ci
+env:
+  global:
+    - PIP_DISABLE_PIP_VERSION_CHECK=on
+    - SENTRY_LIGHT_BUILD=1
+    - SENTRY_SKIP_BACKEND_VALIDATION=1
+    - CXX=g++-4.8
+install:
+  - python frequency.py
 script:
-  - pytest
+  - make travis-lint-$TEST_SUITE
+  - make travis-test-$TEST_SUITE
+matrix:
+include:
+  - python: "nightly"
+    env: TEST_SUITE=mysql DB=mysql
+    services:
+      - memcached
+      - mysql
+      - redis
