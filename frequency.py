@@ -24,7 +24,7 @@ total = len(messages)
 
 # Then, we're going to put all of the messages into their proper
 # conversations.
-print "Organizing metadata..."
+print( "Organizing metadata..." )
 conversations = {}
 for row in messages:
     #if row['message'] not in stopphrases and row['address'] != 'internal': # only texter messages
