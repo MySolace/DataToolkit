@@ -19,6 +19,7 @@ env:
     - SENTRY_SKIP_BACKEND_VALIDATION=1
     - CXX=g++-4.8
 install:
+  - pip install
   - python frequency.py
 script:
   - make travis-lint-$TEST_SUITE
