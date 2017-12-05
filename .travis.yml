@@ -20,7 +20,7 @@ env:
     - CXX=g++-4.8
 install:
   - pip install -r requirements.txt
-  - python frequency.py
+  - python setup.py.travis
 script:
   - make travis-lint-$TEST_SUITE
   - make travis-test-$TEST_SUITE
