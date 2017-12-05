@@ -33,7 +33,7 @@ total = len(messages)
 # Then, we're going to put all of the messages into their proper
 # conversations.
 
-print 'Organizing metadata...'
+print ('Organizing metadata...')
 conversations = {}
 for row in messages:
 
@@ -43,7 +43,7 @@ for row in messages:
         conversations.setdefault(int(row['conversation_id']),
                                  []).append(row['message'])
 
-print 'Parsing...'
+print ('Parsing...')
 
 # Then we're going to put all the messages in a conversation into
 # a single string.
@@ -60,6 +60,6 @@ stdout.flush()
 
 # Generate the output file
 
-print 'Writing CSV...'
+print ('Writing CSV...')
 output = csvOutput('frequency')
 output.output(wordCounts)
